@@ -1,28 +1,40 @@
 .to-do-list {
-    max-width: 400px;
-    margin: 40px auto;
+max-width: 400px;
+width: 90%;
+margin: 40px auto;
     padding: 20px;
     border: 2px solid #4a90e2;
     border-radius: 10px;
     background-color: #f5f9ff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+box-sizing: border-box;
 }
 
 .to-do-list h1 {
-    text-align: center;
+text-align: center;
     color: #2c3e50;
     margin-bottom: 20px;
+font-size: 2rem;
+}
+
+.to-do-list div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
 .to-do-list div>input[type="text"] {
-    width: 70%;
+    flex: 1 1 60%;
+    min-width: 150px;
     padding: 10px;
     border: 2px solid #4a90e2;
     border-radius: 5px;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s ease;
+box-sizing: border-box;
 }
 
 .to-do-list div>input[type="text"]:focus {
@@ -30,56 +42,97 @@
 }
 
 .add-button {
-    padding: 10px 15px;
-    margin-left: 10px;
-    background-color: #4a90e2;
+flex: 1 1 30%;
+    min-width: 80px;
+padding: 10px 15px;
+background-color: #4a90e2;
     border: none;
     border-radius: 5px;
     color: white;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
+box-sizing: border-box;
 }
 
 .add-button:hover {
-    background-color: #357ab8;
+background-color: #357ab8;
 }
 
 ol {
-    margin-top: 20px;
+margin-top: 20px;
     padding-left: 20px;
 }
 
 li {
-    display: flex;
-    align-items: center;
+display: flex;
+flex-wrap: wrap;
+align-items: center;
     justify-content: space-between;
     padding: 8px 12px;
     border-bottom: 1px solid #dbe9ff;
     font-size: 1.1rem;
     color: #34495e;
+box-sizing: border-box;
 }
 
 li span {
-    flex-grow: 1;
+flex-grow: 1 1 auto;
     user-select: none;
+min-width: 120px;
+    margin-right: 10px;
+    word-break: break-word;
 }
 
 li button {
-    margin-left: 8px;
-    padding: 5px 8px;
+margin: 4px 4px 4px 0;
+    padding: 6px 10px;
     background-color: #ecf0f1;
     border: 1px solid #bdc3c7;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
     transition: background-color 0.2s ease;
+flex: 0 0 auto;
 }
 
 li button:hover {
-    background-color: #d0d7e8;
+background-color: #d0d7e8;
 }
 
 li button:active {
-    background-color: #aab8d4;
+background-color: #aab8d4;
+}
+/* Responsive adjustments for smaller devices */
+@media (max-width: 480px) {
+    .to-do-list h1 {
+        font-size: 1.5rem;
+    }
+
+    .to-do-list div>input[type="text"] {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+
+    .add-button {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+
+    li {
+        font-size: 1rem;
+        padding: 10px 8px;
+    }
+
+    li button {
+        padding: 5px 8px;
+        font-size: 0.85rem;
+        margin: 3px 3px 3px 0;
+    }
+
+    li span {
+        min-width: 0;
+        margin-bottom: 6px;
+        width: 100%;
+    }
 }
