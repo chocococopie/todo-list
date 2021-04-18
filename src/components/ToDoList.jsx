@@ -40,30 +40,40 @@ import './ToDoList.css';
             }
         }
 
-        return (<>
-        <div className="to-do-list">
-            <h1>To-Do-List</h1>
-            <div>
-                <input type="text" 
-                placeholder="Enter a task..."
-                value={newTask}
-                onChange={handleInputChange}
+        return (
+          <>
+            <div className="to-do-list">
+              <h1>To-Do-List</h1>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Enter a task..."
+                  value={newTask}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      addTask();
+                    }
+                  }}
                 />
-                <button className="add-button" onClick={addTask}>Add</button>
-            </div>
+                <button className="add-button" onClick={addTask}>
+                  Add
+                </button>
+              </div>
 
-            <ol>
-                {tasks.map((task, index) =>
-                    <li key={index}>
-                        <span>{task}</span>
-                        <button onClick={() => deleteTask(index)}>Delete</button>
-                        <button onClick={() => moveTaskUp(index)}>Up</button>
-                        <button onClick={() => moveTaskDown(index)}>Down</button>
-                    </li>
-                )}
-            </ol>
-        </div>
-        </>);
+              <ol>
+                {tasks.map((task, index) => (
+                  <li key={index}>
+                    <span>{task}</span>
+                    <button onClick={() => deleteTask(index)}>Delete</button>
+                    <button onClick={() => moveTaskUp(index)}>Up</button>
+                    <button onClick={() => moveTaskDown(index)}>Down</button>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </>
+        );
     }
 
 export default ToDoList
