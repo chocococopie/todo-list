@@ -3,41 +3,56 @@ import './ToDoList.css';
 
     function ToDoList() {
 
-        const [tasks, setTasks] = useState(["Eat breakfast", "Take a shower", "Walk the dog"]);
+        const [tasks, setTasks] = useState([
+          { text: "Eat breakfast", completed: false },
+          { text: "Take a shower", completed: false },
+          { text: "Walk the dog", completed: false },
+        ]);
+
         const [newTask, setNewTask] = useState("");
 
         function handleInputChange(event) {
-            setNewTask(event.target.value);
+          setNewTask(event.target.value);
         }
 
         function addTask() {
-            if (newTask.trim() !== "") {
-                setTasks(t => [...t, newTask]);
-                setNewTask("");
-            }
+          if (newTask.trim() !== "") {
+            setTasks((t) => [...t, { text: newTask, completed: false }]);
+            setNewTask("");
+          }
         }
 
         function deleteTask(index) {
-            const updateTasks = tasks.filter((element, i) => i !== index);
-            setTasks(updateTasks);
+          const updateTasks = tasks.filter((element, i) => i !== index);
+          setTasks(updateTasks);
         }
 
         function moveTaskUp(index) {
-
-            if(index > 0) {
-                const updatedTasks = [...tasks];
-                [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]];
-                setTasks(updatedTasks);
-            }
+          if (index > 0) {
+            const updatedTasks = [...tasks];
+            [updatedTasks[index], updatedTasks[index - 1]] = [
+              updatedTasks[index - 1],
+              updatedTasks[index],
+            ];
+            setTasks(updatedTasks);
+          }
         }
 
         function moveTaskDown(index) {
+          if (index < tasks.length - 1) {
+            const updatedTasks = [...tasks];
+            [updatedTasks[index], updatedTasks[index + 1]] = [
+              updatedTasks[index + 1],
+              updatedTasks[index],
+            ];
+            setTasks(updatedTasks);
+          }
+        }
 
-            if(index < tasks.length - 1) {
-                const updatedTasks = [...tasks];
-                [updatedTasks[index], updatedTasks[index + 1]] = [updatedTasks[index + 1], updatedTasks[index]];
-                setTasks(updatedTasks);
-            }
+        function toggleTaskCompletion(index) {
+          const updatedTasks = [...tasks];
+          updatedTasks[index].completed = !updatedTasks[index].completed;
+          setTasks(updatedTasks);
         }
 
         return (
@@ -63,8 +78,13 @@ import './ToDoList.css';
 
               <ol>
                 {tasks.map((task, index) => (
-                  <li key={index}>
-                    <span>{task}</span>
+                  <li key={index} className={task.completed ? "completed" : ""}>
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => toggleTaskCompletion(index)}
+                    />
+                    <span>{task.text}</span>
                     <button onClick={() => deleteTask(index)}>Delete</button>
                     <button onClick={() => moveTaskUp(index)}>Up</button>
                     <button onClick={() => moveTaskDown(index)}>Down</button>
